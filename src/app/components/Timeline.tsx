@@ -27,7 +27,7 @@ const timelineItems = [
     animType: "waveform" as const,
   },
   {
-    date: "March 3 & 4, 2027",
+    date: "March 4 & 5, 2027",
     title: "Conference Dates",
     description:
       "Two-day international conference at Adi Shankara Institute of Engineering and Technology, Kalady, Kerala.",

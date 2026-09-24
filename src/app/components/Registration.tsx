@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
@@ -7,7 +7,7 @@ gsap.registerPlugin(ScrollTrigger);
 const plans = [
   {
     name: "Students / Research Scholars",
-    price: "₹350",
+    prices: { ASIET: "₹300", Others: "₹500" },
     currency: "INR",
     features: [
       "Access to all sessions",
@@ -19,7 +19,7 @@ const plans = [
   },
   {
     name: "Faculty",
-    price: "₹500",
+    prices: { ASIET: "₹600", Others: "₹750" },
     currency: "INR",
     features: [
       "Access to all sessions",
@@ -32,7 +32,7 @@ const plans = [
   },
   {
     name: "Industry Professionals",
-    price: "₹750",
+    prices: { ASIET: "₹1000", Others: "₹1000" },
     currency: "INR",
     features: [
       "Access to all sessions",
@@ -45,7 +45,7 @@ const plans = [
   },
   {
     name: "Foreign Participants",
-    price: "$15",
+    prices: { ASIET: "$25", Others: "$25" },
     currency: "USD",
     features: [
       "Access to all sessions",
@@ -62,6 +62,7 @@ export function Registration() {
   const sectionRef = useRef<HTMLElement>(null);
   const cardsRef = useRef<HTMLDivElement>(null);
   const bankRef = useRef<HTMLDivElement>(null);
+  const [activeCategory, setActiveCategory] = useState<"ASIET" | "Others">("ASIET");
 
   useEffect(() => {
     // Defer to next frame so layout is stable before ScrollTrigger calculates
@@ -145,6 +146,36 @@ export function Registration() {
           </h2>
         </div>
 
+        {/* Category Toggle */}
+        <div className="flex justify-center mb-10">
+          <div
+            className="flex gap-1 p-1"
+            style={{
+              background: "rgba(46, 64, 54, 0.06)",
+              border: "1px solid rgba(46, 64, 54, 0.08)",
+              borderRadius: "var(--radius-pill)",
+            }}
+          >
+            {(["ASIET", "Others"] as const).map((cat) => (
+              <button
+                key={cat}
+                onClick={() => setActiveCategory(cat)}
+                className="px-6 py-2 text-[10px] uppercase tracking-[0.18em] font-semibold transition-all duration-300"
+                style={{
+                  fontFamily: "var(--font-mono)",
+                  borderRadius: "var(--radius-pill)",
+                  background: activeCategory === cat ? "var(--moss)" : "transparent",
+                  color: activeCategory === cat ? "var(--cream)" : "rgba(26, 26, 26, 0.45)",
+                  border: "none",
+                  cursor: "pointer",
+                }}
+              >
+                {cat}
+              </button>
+            ))}
+          </div>
+        </div>
+
         {/* Pricing Cards */}
         <div ref={cardsRef} className="grid md:grid-cols-2 lg:grid-cols-4 gap-5 mb-12">
           {plans.map((plan, idx) => (
@@ -197,7 +228,7 @@ export function Registration() {
                     color: plan.highlight ? "var(--clay)" : "var(--charcoal)",
                   }}
                 >
-                  {plan.price}
+                  {plan.prices[activeCategory]}
                 </span>
                 <span
                   className="text-xs"
