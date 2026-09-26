@@ -11,6 +11,7 @@ const domains = [
   { title: "Finance", tags: "FinTech, Crypto, Banking, Risk Management" },
   { title: "Marketing", tags: "Digital Marketing, Branding, Consumer Behavior" },
   { title: "Engineering", tags: "Robotics, Automation, Sustainable Energy" },
+  { title: "Interdisciplinary Themes", sub: "Science · Technology · Management · Engineering" },
 ];
 
 export function CallForPapers() {
