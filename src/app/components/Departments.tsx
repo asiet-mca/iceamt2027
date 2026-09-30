@@ -6,38 +6,26 @@ gsap.registerPlugin(ScrollTrigger);
 
 /* ─── Data ─── */
 const departments = [
-  {
-    name: "Basic Science & Humanities",
-    focus: "Mathematics, Physics, Chemistry — 20+ Expert Faculty",
-  },
-  {
-    name: "Management Studies",
-    focus: "Operations, Marketing, Finance, HR — Est. 2004",
-  },
-  {
-    name: "Computer Applications",
-    focus: "Python, Java, AI, Cybersecurity, Cloud — Est. 2023",
-  },
-  {
-    name: "Civil Engineering",
-    focus: "Structural, Geotechnical, Environmental, Transportation",
-  },
+  { name: "Basic Science & Humanities", focus: "Mathematics, Physics, Materials Science" },
+  { name: "Management Studies", focus: "Business, Finance, Leadership, Ethics" },
+  { name: "Computer Applications", focus: "AI, Machine Learning, Cybersecurity, Blockchain" },
+  { name: "Civil Engineering", focus: "Structural, Geotechnical, Environmental, Transportation" },
 ];
 
 const researchDomains = [
-  { label: "Management", sub: "Strategy · HR · Operations" },
-  { label: "Emerging Tech", sub: "IoT · Blockchain · Cloud" },
-  { label: "AI & Data Science", sub: "ML · Big Data · Neural Nets" },
-  { label: "Finance", sub: "FinTech · Crypto · Banking" },
-  { label: "Marketing", sub: "Digital · Branding · UX" },
-  { label: "Engineering", sub: "Robotics · Automation · Energy" },
+  { label: "Applied Science", sub: "Mathematics · Physics · Materials" },
+  { label: "Management & Business", sub: "Finance · Ethics · Human–AI Partnership" },
+  { label: "Computing & Technology", sub: "AI · Quantum · Blockchain" },
+  { label: "Civil Engineering", sub: "Structural & Materials, Geotechnical & Transportation, Hydraulics & Environmental, GIS & Interdisciplinary"},
+  { label: "Interdisciplinary Themes", sub: "Science · Technology · Management · Engineering" },
 ];
 
 const scheduleTracks = [
-  { day: "Day 1 AM", track: "Applied Science" },
-  { day: "Day 1 PM", track: "Management" },
-  { day: "Day 2 AM", track: "Technology" },
-  { day: "Day 2 PM", track: "Engineering" },
+  { day: "Session 1", track: "Applied Science" },
+  { day: "Session 2", track: "Management & Business" },
+  { day: "Session 3", track: "Computing & Technology" },
+  { day: "Session 4", track: "Civil Engineering" },
+  { day: "Session 5", track: "Interdisciplinary Themes" },
 ];
 
 /* ─── Card 1: Vertical Shuffler — CSS animation driven, React-safe ─── */
@@ -78,7 +66,7 @@ function ShufflerCard() {
         className="text-[10px] uppercase tracking-[0.2em] mb-1"
         style={{ fontFamily: "var(--font-mono)", color: "var(--clay)" }}
       >
-        Diagnostic Shuffler
+        Departments
       </span>
       <h3
         className="text-lg font-bold mb-4"
@@ -237,7 +225,7 @@ function ResearchRadarCard() {
           </div>
         </div>
 
-        {/* Domain strip — all 6 as small indicators */}
+        {/* Domain strip — all 5 as small indicators */}
         <div className="space-y-1">
           {researchDomains.map((domain, idx) => {
             const isActive = idx === activeIdx;
@@ -297,13 +285,14 @@ function SchedulerCard() {
       { x: 40, y: 75 },
       { x: 40, y: 120 },
       { x: 40, y: 165 },
+      { x: 40, y: 210 },
     ];
 
     const runSequence = () => {
       if (step === 0) {
         setShowCursor(true);
         setCursorPos({ x: -10, y: cellPositions[0].y });
-      } else if (step <= 4) {
+      } else if (step <= 5) {
         const idx = step - 1;
         setCursorPos(cellPositions[idx]);
         setTimeout(() => {
@@ -313,9 +302,9 @@ function SchedulerCard() {
             setActiveIdx(idx);
           }, 150);
         }, 300);
-      } else if (step === 5) {
-        setCursorPos({ x: 200, y: 210 });
       } else if (step === 6) {
+        setCursorPos({ x: 200, y: 255 });
+      } else if (step === 7) {
         setShowCursor(false);
         setActiveIdx(-1);
         step = -1;
@@ -342,7 +331,7 @@ function SchedulerCard() {
         className="text-[10px] uppercase tracking-[0.2em] mb-1"
         style={{ fontFamily: "var(--font-mono)", color: "var(--clay)" }}
       >
-        Cursor Protocol
+        Tentative Schedule
       </span>
       <h3
         className="text-lg font-bold mb-4"
@@ -394,7 +383,7 @@ function SchedulerCard() {
               }}
             >
               <span
-                className="text-[10px] uppercase tracking-[0.12em] w-16 flex-shrink-0"
+                className="text-[10px] uppercase tracking-[0.12em] w-20 flex-shrink-0"
                 style={{
                   fontFamily: "var(--font-mono)",
                   color:
@@ -443,6 +432,7 @@ export function Departments() {
   const cardsRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    const ctxRef = { current: null as gsap.Context | null };
     const raf = requestAnimationFrame(() => {
       ScrollTrigger.refresh();
       const ctx = gsap.context(() => {
@@ -455,7 +445,6 @@ export function Departments() {
       });
       ctxRef.current = ctx;
     });
-    const ctxRef = { current: null as gsap.Context | null };
     return () => { cancelAnimationFrame(raf); ctxRef.current?.revert(); };
   }, []);
 

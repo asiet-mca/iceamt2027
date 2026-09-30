@@ -5,12 +5,11 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 gsap.registerPlugin(ScrollTrigger);
 
 const domains = [
-  { title: "Management", tags: "Strategy, HR, Operations, Entrepreneurship" },
-  { title: "Emerging Tech", tags: "IoT, Blockchain, Cloud, Cyber Security" },
-  { title: "AI & Data Science", tags: "ML, Big Data, Neural Networks" },
-  { title: "Finance", tags: "FinTech, Crypto, Banking, Risk Management" },
-  { title: "Marketing", tags: "Digital Marketing, Branding, Consumer Behavior" },
-  { title: "Engineering", tags: "Robotics, Automation, Sustainable Energy" },
+  { title: "Applied Science", tags: "Mathematics · Physics · Materials"  },
+  { title: "Management & Business", tags: "Finance · Ethics · Human–AI Partnership"},
+  { title: "Computing & Technology", tags: "AI · Quantum · Blockchain" },
+  { title: "Civil Engineering", tags: "Structural & Materials, Geotechnical & Transportation, Hydraulics & Environmental, GIS & Interdisciplinary"},
+  { title: "Interdisciplinary Themes", tags: "Science · Technology · Management · Engineering" },
 ];
 
 export function CallForPapers() {

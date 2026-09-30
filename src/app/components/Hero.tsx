@@ -176,7 +176,7 @@ export function Hero() {
                 className="text-sm md:text-base font-semibold"
                 style={{ color: "var(--cream)" }}
               >
-                March 3 & 4, 2027
+                March 4 & 5, 2027
               </span>
             </div>
             <div
