@@ -16,7 +16,7 @@ const researchDomains = [
   { label: "Applied Science", sub: "Mathematics · Physics · Materials" },
   { label: "Management & Business", sub: "Finance · Ethics · Human–AI Partnership" },
   { label: "Computing & Technology", sub: "AI · Quantum · Blockchain" },
-  { label: "Civil Engineering", sub: "Smart Cities · BIM · Sustainable Infrastructure" },
+  { label: "Civil Engineering", sub: "Structural & Materials, Geotechnical & Transportation, Hydraulics & Environmental, GIS & Interdisciplinary"},
   { label: "Interdisciplinary Themes", sub: "Science · Technology · Management · Engineering" },
 ];
 
@@ -494,4 +494,4 @@ export function Departments() {
       </div>
     </section>
   );
-}
+}
